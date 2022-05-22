@@ -50,7 +50,7 @@ export default defineComponent({
     } 
   },
   methods: {
-    remove(id) {
+    remove(id: number) {
       this.$store.dispatch("github/removeUser", id)
     }
   }

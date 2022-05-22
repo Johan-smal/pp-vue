@@ -14,7 +14,7 @@ type GithubUser = yup.InferType<typeof gitHubUserSchema>;
 export type GithubState = {
   users: GithubUser[],
   fetched: boolean,
-  fetching: boolean,
+  loading: boolean,
   error: string | null
 }
 
@@ -34,25 +34,26 @@ const getters = {
 }
 
 const actions = {
-  async fetchUsers({ commit, dispatch } : { commit: Vuex.Commit, dispatch: Vuex.dispatch }) {
+  async fetchUsers({ commit, dispatch } : { commit: Vuex.Commit, dispatch: Vuex.Dispatch }) {
     dispatch('setLoading', true)
     try {
       const { data } = await axios.get('https://api.github.com/users')
-      const users = await yup.array(gitHubUserSchema).validate(data)
+      const users = await yup.array(gitHubUserSchema).required().validate(data)
       commit('SET_USERS', users.slice(0, 10))
     } catch (e) {
-      commit('SET_ERROR', e.message)
+      if (e instanceof Error)
+        commit('SET_ERROR', e.message)
     } finally {
       dispatch('setLoading', false)
     }
   },
 
-  setLoading({ commit } : { commit: Vuex.Commit }, loading) {
+  setLoading({ commit } : { commit: Vuex.Commit }, loading: boolean) {
     commit('SET_LOADING', loading)
   },
 
-  removeUser({ commit, getters } : { commit: Vuex.Commit, getters: Vuex.Getters }, userId) {
-    const filteredUsers = getters.getUsers.filter(user => user.id !== userId)
+  removeUser({ commit, getters } : Vuex.ActionContext<GithubState, unknown>, userId: number) {
+    const filteredUsers = getters.getUsers?.filter((user: GithubUser) => user.id !== userId) || []
     commit('SET_USERS', filteredUsers)
   }
 }
