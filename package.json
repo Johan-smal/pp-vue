@@ -7,7 +7,9 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "test:open-ct": "npx cypress open-ct",
+    "test:run-ct": "npx cypress run-ct"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -17,9 +19,13 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@cypress/vite-dev-server": "^2.2.3",
+    "@cypress/vue": "^3.1.2",
     "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/compiler-sfc": "^3.2.35",
     "@vue/test-utils": "^2.0.0",
     "autoprefixer": "^10.4.7",
+    "cypress": "^9.6.1",
     "jsdom": "^19.0.0",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24",
