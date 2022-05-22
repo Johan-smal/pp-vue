@@ -7,9 +7,9 @@
     :key="user.id"
     :title="user.login"
   >
-    <template #body>
+    <div>
       <img :src="user.avatar_url" />
-    </template>
+    </div>
     <template #actions>
       <button @click="remove(user.id)">REMOVE</button>
     </template>

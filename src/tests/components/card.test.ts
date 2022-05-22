@@ -4,20 +4,21 @@ import Card from '../../components/Card.vue'
 test('mount component', async () => {
   expect(Card).toBeTruthy()
 
+  const title = 'the title'
+  const defaultSlot = 'Main Content'
+  const actionsSlot = 'a button or something'
+
   const wrapper = mount(Card, {
     props: {
-      count: 4,
+      title
     },
+    slots: {
+      default: defaultSlot,
+      actions: actionsSlot
+    }
   })
 
-  expect(wrapper.text()).toContain('4 x 2 = 8')
-  expect(wrapper.html()).toMatchSnapshot()
-
-  await wrapper.get('button').trigger('click')
-
-  expect(wrapper.text()).toContain('4 x 3 = 12')
-
-  await wrapper.get('button').trigger('click')
-
-  expect(wrapper.text()).toContain('4 x 4 = 16')
+  expect(wrapper.text()).toContain(title)
+  expect(wrapper.text()).toContain(defaultSlot)
+  expect(wrapper.text()).toContain(actionsSlot)
 })

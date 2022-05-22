@@ -14,7 +14,7 @@ defineExpose(props)
       <h3 class="text-lg">{{ title }}</h3>
     </div>
     <div>
-      <slot name="body"></slot>
+      <slot></slot>
     </div>
     <div>
       <slot name="actions"></slot>
