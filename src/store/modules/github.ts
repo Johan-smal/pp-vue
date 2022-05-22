@@ -14,19 +14,23 @@ type GithubUser = yup.InferType<typeof gitHubUserSchema>;
 export type GithubState = {
   users: GithubUser[],
   fetched: boolean,
-  fetching: boolean
+  fetching: boolean,
+  error: string | null
 }
 
 const state: GithubState = {
   users: [],
   fetched: false,
   loading: false,
+  error: null
 }
 
 const getters = {
-  getUsers: (state: GithubState) : GithubUser[] => state.users,
-  isUsersFetched: (state: GithubState) : boolean => state.fetched,
-  isLoading: (state: GithubState) : boolean => state.loading,
+  getUsers: (state: GithubState): GithubUser[] => state.users,
+  isUsersFetched: (state: GithubState): boolean => state.fetched,
+  isLoading: (state: GithubState): boolean => state.loading,
+  hasError: (state: GithubState): boolean => !!state.error,
+  getError: (state: GithubState): string => state.error || '',
 }
 
 const actions = {
@@ -37,9 +41,7 @@ const actions = {
       const users = await yup.array(gitHubUserSchema).validate(data)
       commit('SET_USERS', users.slice(0, 10))
     } catch (e) {
-      // TODO handle errors
-      alert('error')
-      console.log(e)
+      commit('SET_ERROR', e.message)
     } finally {
       dispatch('setLoading', false)
     }
@@ -47,6 +49,11 @@ const actions = {
 
   setLoading({ commit } : { commit: Vuex.Commit }, loading) {
     commit('SET_LOADING', loading)
+  },
+
+  removeUser({ commit, getters } : { commit: Vuex.Commit, getters: Vuex.Getters }, userId) {
+    const filteredUsers = getters.getUsers.filter(user => user.id !== userId)
+    commit('SET_USERS', filteredUsers)
   }
 }
 
@@ -58,6 +65,10 @@ const mutations = {
 
   SET_LOADING(state: GithubState, loading: boolean) {
     state.loading = loading
+  },
+
+  SET_ERROR(state: GithubState, error: string) {
+    state.error = error
   }
 }
 
