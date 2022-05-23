@@ -1,12 +1,16 @@
 # Intro
 
-I tried for the first time to use the stack mentioned below..
+I tried for the first time to use the stack mentioned below.. Previously only use Vue2
 
-Conclusion: 
-Vue 3 with Typescript: Documentation regarding everything needed to properly work is still lacking, but the overall experience is a big improvement from Vue 2 & JS
-Vite: Awesome tool and so fast!
-Tailwind: Not a great tool for quick styling, might just as well do inline styling.. Maybe for bigger projects that don't rely on third party component libraries and don't want the flexablitity and functionality of SASS
-Cypress: I used a very basic test, but would like to explore this for e2e testing more
+Conclusion:
+
+`Vue 3 with Typescript:` Documentation regarding everything needed to properly work is still lacking, but the overall experience is a big improvement from Vue 2 & JS
+
+`Vite:` Awesome tool and so fast!
+
+`Tailwind:` Not a great tool for quick styling, might just as well do inline styling.. Maybe for bigger projects that don't rely on third party component libraries and don't want the flexablitity and functionality of SASS
+
+`Cypress:` I used a very basic test, but would like to explore this for e2e testing more
 
 The lack of styling is due to me wanting to try Tailwind instead of a component/css library which back fired to the time I wanted to work on this.
 
