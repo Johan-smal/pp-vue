@@ -1,7 +1,6 @@
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-  <router-link :to="{ name: 'users' }"><button>GITHUB USERS</button></router-link>
+  <router-link :to="{ name: 'users' }"><Button>GITHUB USERS</Button></router-link>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Button from '../components/Button.vue'
+</script>

@@ -9,11 +9,11 @@ defineExpose(props)
 </script>
 
 <template>
-  <div>
+  <div class="border-slate-100 m-10">
     <div>
-      <h3 class="text-lg">{{ title }}</h3>
+      <h3 class="font-semibold text-slate-900">{{ title }}</h3>
     </div>
-    <div>
+    <div class="m-5">
       <slot></slot>
     </div>
     <div>

@@ -8,10 +8,10 @@
     :title="user.login"
   >
     <div>
-      <img :src="user.avatar_url" />
+      <img class="w-20 h-20 rounded-full bg-slate-100 ring-2 ring-white" :src="user.avatar_url" />
     </div>
     <template #actions>
-      <button @click="remove(user.id)">REMOVE</button>
+      <my-button @click="remove(user.id)">REMOVE</my-button>
     </template>
   </card>
 </div>
@@ -29,11 +29,13 @@ import axios from 'axios'
 
 import Card from '../components/Card.vue'
 import LoadingSpinner from '../components/LoadingSpinner.vue'
+import Button from '../components/Button.vue'
 
 export default defineComponent({
   components: {
     card: Card,
-    'loading-spinner': LoadingSpinner
+    'loading-spinner': LoadingSpinner,
+    'my-button': Button
   },
   computed: {
     ...mapGetters("github", {
